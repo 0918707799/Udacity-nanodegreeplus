@@ -87,7 +87,12 @@ class MainPage(webapp2.RequestHandler):
         if not(month and day and year):
             self.write_form("That is wrong input", user_month, user_day, user_year)
         else:
-            self.response.write("Thanks! that is correct input")
+            self.redirect("/thanks")
+
+class ThanksHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write("Thanks! that is correct input")
 
 
-app = webapp2.WSGIApplication([('/', MainPage)], debug=True)
+
+app = webapp2.WSGIApplication([('/', MainPage),('/thanks',ThanksHandler)], debug=True)
