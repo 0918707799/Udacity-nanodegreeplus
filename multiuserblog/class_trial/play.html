@@ -1,0 +1,72 @@
+<form>
+    <!--default input type is text.
+
+
+    ""This is demo file for the form imput type""
+    text, password, checkbox, radio, select, option, label
+
+        type=text
+        type=password should be used for the password box. It will show bullet circle instead of the character"
+        type=checkbox
+        <input action="http://www.google.com">
+        <input name="q">
+        <input type="text" name="q">
+        <input type="password name="q">
+
+
+    <input type="checkbox" name="q">
+    <input type="checkbox" name="r">
+    <input type="checkbox" name="s">
+    if you have selected first two boxes than url will change to q=on&r=on
+    example. file:///home/bittu/Documents/UDACITY/3_multiuserblog/class_trial/play.html?r=on&s=on
+    single one will be q=on
+
+
+
+    <input type="radio" name="q">
+    <input type="radio" name="r">
+    <input type="radio" name="s">
+    which ever is selected url will have that radio button on
+    example. suppose u selected 3rd radio, than url will be file:///home/bittu/Documents/UDACITY/3_multiuserblog/class_trial/play.html?s=on
+    Usually, you can select only one radio button but if you just hav these 3 line than you can probably select two or all of them.
+
+    So to make it only one selectable, give them a same name. But each time url will have q=on
+    <input type="radio" name="q">
+    <input type="radio" name="q">
+    <input type="radio" name="q">
+
+    to get over this thing we can add value parameter
+    <input type="radio" name="q" value="one">
+    <input type="radio" name="q" value="two">
+    <input type="radio" name="q" value="three">
+
+    you can put this radio input lin inside the <label> tag so that user can identify which radio represent which thing
+
+    <label>
+        One
+        <input type="radio" name="q" group="a" value="one">
+    </label>
+
+    This will show dropdown menu and when you select one element and click on submit, url will have q=<selected option>
+    <select name="q">
+        <option>one</option>
+        <option>two</option>
+        <option>three</option>
+    </select>
+
+    instead of the text of selected option you can add value parameter when you have bog text in option
+    <select name="q">
+        <option value="1">one</option>
+        <option value="2">two</option>
+        <option value="3">three</option>
+    </select>
+
+    This value will be inside the box , wehn page will be loaded
+    <input type="text" name="month" value="Month">
+    <input type="text" name="day" value="day">
+    <input type="text" name="year" value="Year">
+-->
+
+    <br>
+    <input type="submit">
+</form>
