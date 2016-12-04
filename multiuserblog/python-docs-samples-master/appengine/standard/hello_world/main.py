@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import webapp2
+import jinja2
 
 form = """
 <form method="post">
