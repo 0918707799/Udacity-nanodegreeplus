@@ -18,8 +18,12 @@ class Handler(webapp2.RequestHandler):
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
 
-
 class MainPage(Handler):
+    def get(self):
+        self.render('homepage.html')
+
+
+class Listi(Handler):
     def get(self):
         items = self.request.get_all("food")
         self.render("shopping_list.html", items = items)
@@ -33,4 +37,5 @@ class FizzBuzzHandler(Handler):
 
 
 app = webapp2.WSGIApplication([('/', MainPage),
+                               ('/shopping_list', Listi),
                                ('/fizzbuzz', FizzBuzzHandler)], debug=True)

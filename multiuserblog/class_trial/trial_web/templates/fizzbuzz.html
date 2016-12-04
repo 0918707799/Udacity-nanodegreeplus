@@ -1,6 +1,9 @@
+{% extends "base.html" %} {% block content %}
+
 <form>
-    <h2>Add a food</h2>
-    <input type="text" name="food">
+    <h2>Fizzbuzz</h2>
+    <h3>Till what number do u want to chek fizzbuzz?</h3>
+    <input type="text" name="n">
     <button> Add</button>
 
     <ol>
@@ -11,3 +14,6 @@
         {% endfor %}
     </ol>
 </form>
+
+<br><br><br><br><br>
+<a href="/"><button> homepage </button></a> {% endblock %}
