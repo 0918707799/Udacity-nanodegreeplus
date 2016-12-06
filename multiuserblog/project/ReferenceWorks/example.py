@@ -94,3 +94,8 @@ links = [
 # 15
 
 def query():
+    for e in links:
+        if e.id==15:
+            print e.votes
+            return e.votes
+query()
