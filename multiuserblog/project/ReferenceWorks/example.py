@@ -93,9 +93,14 @@ links = [
 # make the function query() return the number of votes for the link whose ID is
 # 15
 
+# make the function query() return a list of Links submitted by user 62443, by
+# submission time ascending
 def query():
+    li=[]
     for e in links:
-        if e.id==15:
-            print e.votes
-            return e.votes
-query()
+        if e.submitter_id == 62443:
+            li.append(e)
+    li.sort(key = lambda a: a.submitted_time)
+    return li
+
+print query()
