@@ -116,10 +116,14 @@ for l in links:
 # QUIZ - make the function query() return the number of votes the link with ID = 2 has
 # QUIZ - make the function query() return the ID of the link that was
 # submitted by user 62443 and has > 1000 votes.
+# QUIZ - make the function query() return a list of the IDs of the links
+# that were submitted by user 62443 sorted by submission time ascending.
 def query():
-    c = db.execute("select * from links where submitter_id=62443 and votes>1000"
-
-    link = Link(*c.fetchone())
-    return link.votes
+    li=[]
+    c = db.execute("select * from links where submitter_id=62443 order by submitted_time asc")
+    for link_tuple in c:
+        link = Link(*link_tuple)
+        li.append(link.id)
+    return li
 
 print query()
