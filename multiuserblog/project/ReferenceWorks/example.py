@@ -114,8 +114,10 @@ for l in links:
 #     print link.votes
 #
 # QUIZ - make the function query() return the number of votes the link with ID = 2 has
+# QUIZ - make the function query() return the ID of the link that was
+# submitted by user 62443 and has > 1000 votes.
 def query():
-    c = db.execute("select * from links where id=2")
+    c = db.execute("select * from links where submitter_id=62443 and votes>1000"
 
     link = Link(*c.fetchone())
     return link.votes
