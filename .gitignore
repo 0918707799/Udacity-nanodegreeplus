@@ -5,5 +5,5 @@ multiuserblog/python-docs-samples-master/
 
 
 # ignoring this directory for gitignore
-multiuserblog/python-docs-samples-master/appengine/standard/hello_world/
+!multiuserblog/python-docs-samples-master/appengine/standard/hello_world/
 
