@@ -118,9 +118,11 @@ for l in links:
 # submitted by user 62443 and has > 1000 votes.
 # QUIZ - make the function query() return a list of the IDs of the links
 # that were submitted by user 62443 sorted by submission time ascending.
-def query():
-    c = db.execute("select id from links where submitter_id=62443 order by submitted_time asc")
-    li = [t[0] for t in c]
-    return li
+# QUIZ - implement the function link_by_id() that takes a link's ID and returns
+# the Link object itself
+def link_by_id(link_id):
+    for c in links:
+        if c.id==link_id:
+            print c
 
-print query()
+link_by_id(24)
