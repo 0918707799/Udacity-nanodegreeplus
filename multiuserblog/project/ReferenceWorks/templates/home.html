@@ -23,6 +23,16 @@
         <div class="error"> {{error}}</div>
 
         <input type="submit">
+        <br>
+        <br>
+        <hr>
+        <h2>Your list of ascii art</h2> {% for i in arts %}
+        <div class="art">
+            <div class="art_title"> {{i.title}}</div>
+            <pre class="art_body"> {{i.art}}</pre>
+        </div> {% endfor %}
+
+
 </body>
 
 </html>
