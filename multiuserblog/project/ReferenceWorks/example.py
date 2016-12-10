@@ -101,4 +101,12 @@ def build_link_index():
         dict[c.id]=c
     return dict
 
-print build_link_index()
+link_index = build_link_index()
+
+def link_by_id(link_id):
+    # return link_index[link_id]
+    # above statement return error if link_id does not exist in the provided links list
+    # or to get same output but if link_id doesnot exist it will return "None".
+    return link_index.get(link_id)
+
+print link_by_id(2664)
