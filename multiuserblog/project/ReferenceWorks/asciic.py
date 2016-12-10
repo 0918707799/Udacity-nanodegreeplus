@@ -21,8 +21,11 @@ class Handler(webapp2.RequestHandler):
         self.write(self.render_str(template, **kw))
 
 class MainPage(Handler):
+    def render_front(self, title="", art="", error=""):
+        self.render("home.html", title=title, art=art, error=error)
+
     def get(self):
-        self.render('home.html')
+        self.render_front()
 
     def post(self):
         title = self.request.get("title")
@@ -32,6 +35,6 @@ class MainPage(Handler):
             self.write("Thanks!!!")
         else:
             error = "Something is Missing"
-            self.render("home.html", error = error)
+            self.render_front(title, art, error)
 
 app = webapp2.WSGIApplication([('/', MainPage)], debug=True)
