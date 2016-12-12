@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link type="text/css" rel="stylesheet" href="/static/style.css" />
+
+    <title>Blogs</title>
+</head>
+
+<body>
+    <a href="/blog" class="main-title">
+    Blogs!!
+  </a>
+
+    <a href="/blog/newpost"><button>Create post</button></a>
+
+    <div id="content">
+        {% block content %} {% endblock %}
+    </div>
+</body>
+
+</html>
