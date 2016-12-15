@@ -36,6 +36,9 @@ class MainPage(Handler):
             visits = 0
         self.response.headers.add_header('Set-Cookie', 'visits=%s' % visits)
 
-        self.write("you've been here %s times!" % visits)
+        if visits>100:
+            self.write("you love me!!!")
+        else:
+            self.write("you've been here %s times!" % visits)
 
 app = webapp2.WSGIApplication([('/', MainPage)], debug=True)
