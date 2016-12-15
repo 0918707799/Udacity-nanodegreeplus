@@ -8,7 +8,9 @@ import os
 import jinja2
 import webapp2
 
+# this libraries are for cookies and cookies authentication
 import hashlib
+import hmac
 
 # for the database
 from google.appengine.ext import db
@@ -20,8 +22,9 @@ jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
 # Implemented the function make_secure_val, which takes a string and returns a
 # string of the format:
 # s,HASH
+SECRET ="donot" # do not share or publish this
 def hash_str(s):
-    return hashlib.md5(s).hexdigest()
+    return hmac.new(SECRET, s).hexdigest()
 
 def make_secure_val(s):
     return "%s|%s" % (s, hash_str(s))
