@@ -24,12 +24,12 @@ def hash_str(s):
     return hashlib.md5(s).hexdigest()
 
 def make_secure_val(s):
-    return "%s,%s" % (s, hash_str(s))
+    return "%s|%s" % (s, hash_str(s))
 
 def check_secure_val(h):
-    a= h.split(",")
-    if h == make_secure_val(val):
-        return val
+    a= h.split("|")[0]
+    if (h==make_secure_val(a)):
+        return a
     #or
     # if hash_str(a[0])==a[1]:
     #     return a[0]
@@ -50,12 +50,17 @@ class Handler(webapp2.RequestHandler):
 class MainPage(Handler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/plain'
-        visits = self.request.cookies.get('visits', '0')
-        if visits.isdigit():
-            visits = int(visits) + 1
-        else:
-            visits = 0
-        self.response.headers.add_header('Set-Cookie', 'visits=%s' % visits)
+        visits = 0
+        visit_cookie_st = self.request.cookies.get('visits')
+        if visit_cookie_st:
+            cookie_val = check_secure_val(visit_cookie_st)
+            if cookie_val:
+                visits = int(cookie_val)
+
+        visits += 1
+
+        new_cookie_val = make_secure_val(str(visits))
+        self.response.headers.add_header('Set-Cookie', 'visits=%s' % new_cookie_val)
 
         if visits>100:
             self.write("you love me!!!")
