@@ -39,6 +39,20 @@ def check_secure_val(h):
     # else:
     #     return None
 
+##### simple encryption algorith for the has value of passwork
+# make_salt() function cretate random value
+# and make_pw_hash() creates hash value of (name+psswd+salt)
+def make_salt():
+    return "".join(random.choice(string.letters) for x in xrange(5))
+
+def make_pw_hash(name, pw):
+    ###Your code here
+    salt = make_salt()
+    HASH = hashlib.sha256(name+pw+salt).hexdigest()
+    return "%s,%s" % (HASH, salt)
+
+print make_pw_hash("hello","hey"
+
 class Handler(webapp2.RequestHandler):
     def write(self, *a, **kw):
         self.response.write(*a,**kw)
