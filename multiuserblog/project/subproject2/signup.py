@@ -133,7 +133,23 @@ class SignUp(Handler):
 
 class Front(Handler):
     def get(self):
-        self.render('trial.html')
+        self.render('firstpage.html')
+
+class LogIn(Handler):
+    def get(self):
+        self.render('login.html')
+
+    def post(self):
+        username = self.request.get('username')
+        password = self.request.get('password')
+        data = db.GqlQuery("select * from Userinfo")
+
+        for i in data:
+            if i.username == username:
+                h = i.password
+                if valid_pw(username, password, h):
+                    self.render("welcome.html",username=username)
+
 
 class Welcome(Handler):
     def get(self):
@@ -144,6 +160,7 @@ class Welcome(Handler):
 
 
 app = webapp2.WSGIApplication([('/signup', SignUp),
+                               ('/login', LogIn),
                                ('/?', Front),
                                ('/welcome',Welcome)], debug=True)
 
