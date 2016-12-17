@@ -1,2 +1,12 @@
-{% extends "base.html" %} {% block content %} {% for p in posts %} {{ p.render() | safe }}
-<br><br> {% endfor %} {% endblock %}
+{% extends "base.html" %} {% block content %}
+<hr>
+<hr>
+<h1> Welcome to my website </h1>
+<hr>
+<hr>
+
+<br>
+<br>
+<a href="/signup"> <button>SignUp</button></a>
+
+{% endblock %}
