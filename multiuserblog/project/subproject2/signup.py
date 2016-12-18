@@ -31,6 +31,7 @@ EMAIL_RE  = re.compile(r'^[\S]+@[\S]+\.[\S]+$')
 def valid_email(email):
     return not email or EMAIL_RE.match(email)
 
+
 SECRET ="donot"
 def hash_str(s):
     return hmac.new(SECRET, s).hexdigest()
@@ -42,6 +43,11 @@ def check_secure_val(h):
     a= h.split("|")[0]
     if (h==make_secure_val(a)):
         return a
+
+COOKIE_RE = re.compile(r'.+=;\s*Path=/')
+def valid_cookie(cookie):
+    return cookie and COOKIE_RE.match(cookie)
+
 
 def make_salt():
     return "".join(random.choice(string.letters) for x in xrange(5))
@@ -56,8 +62,9 @@ def valid_pw(name, pw, h):
     salt=h.split(",")[1]
     return h == make_pw_hash(name, pw, salt)
 
-def user_key(name = 'default'):
-    return db.Key.from_path('blogs', name)
+
+def user_key(group = 'default'):
+    return db.Key.from_path('users', group)
 
 def render_str(template, **params):
     t = jinja_env.get_template(template)
@@ -65,11 +72,38 @@ def render_str(template, **params):
 
 class Userinfo(db.Model):
     username = db.StringProperty(required = True)
-    password = db.StringProperty(required = True)
-    email = db.EmailProperty(required = True)
+    password = db.StringProperty(required = True) #not regular password but hash of the password
+    email = db.EmailProperty()
+
     def render(self):
         self._render_text = self.email.replace('\n', '<br>')
         return render_str("post.html", p = self)
+
+    # if you want to work on above created class instead of creating instances, we can use this method
+    # @classmethod is called decorator
+    @classmethod
+    def by_id(cls, uid):
+        return Userinfo.get_by_id(uid, parent = user_key())
+
+    @classmethod
+    def by_name(cls, username):
+        u = Userinfo.all().filter('username =', username).get()
+        return u
+
+    @classmethod
+    def register(cls, username, password, email =None):
+        pw_hash = make_pw_hash(username, password)
+        return Userinfo(parent = user_key(),
+                        username = username,
+                        password = pw_hash,
+                        email = email)
+
+    @classmethod
+    def login(cls, username, password):
+        u = cls.by_name(username)
+        if u and valid_pw(username, password, u):
+            return u
+
 
 class Handler(webapp2.RequestHandler):
     def write(self, *a, **kw):
@@ -81,6 +115,21 @@ class Handler(webapp2.RequestHandler):
 
     def render(self, template, **kw):
         self.write(self.render_str(template, **kw))
+
+    def setting_cookies(self, name, val):
+        new_cookie_val = make_secure_val(val)
+        self.response.headers.add_header('Set-Cookie', '%s=%s; path=/' % (name, new_cookie_val))
+
+    def reading_cookies(self,name):
+        cookie_val = self.request.cookies.get(name)
+        return cookie_val and check_secure_val(cookie_val)
+
+    def login(self, user):
+        self.setting_cookies('user_id', str(user.key().id()))
+
+    def logout(self):
+        self.response.headers.add_header('Set-Cookie', 'user_id=; path=/')
+
 
 class SignUp(Handler):
     def get(self):
@@ -115,25 +164,21 @@ class SignUp(Handler):
             self.render('homepage.html', **params)
         else:
             ## add cookies
-            self.response.headers['Content-Type'] = 'text/plain'
-            username_cookie_st = self.request.cookies.get('name')
-            if username_cookie_st:
-                username_val = check_secure_val(username_cookie_st)
+            check_user_exist = Userinfo.by_name(username)
+            if check_user_exist:
+                self.render('homepage.html', error_username = "That user already exists")
+            else:
+                uinfo = Userinfo.register(username, password , email)
+                uinfo.put()
 
-            new_cookie_val = make_secure_val(str(username))
-            self.response.headers.add_header('Set-Cookie', 'name=%s; path=/' % new_cookie_val)
+                self.login(uinfo)
+                self.redirect('/welcome?username=' + username)
 
-            #encrypt hash password
-            e_password = make_pw_hash(username, password)
-            # create database
-            uinfo = Userinfo(parent = user_key(), username = username, password = e_password, email = email)
-            uinfo.put()
-
-            self.redirect('/welcome?username=' + username)
 
 class Front(Handler):
     def get(self):
         self.render('firstpage.html')
+
 
 class LogIn(Handler):
     def get(self):
@@ -145,23 +190,42 @@ class LogIn(Handler):
         data = db.GqlQuery("select * from Userinfo")
 
         for i in data:
+            pass_val=0
+            u_value=0
             if i.username == username:
                 h = i.password
                 if valid_pw(username, password, h):
-                    self.render("welcome.html",username=username)
+                    return self.render("welcome.html",username=username)
+                else:
+                    return self.render("login.html",error_password="password is wrong")
+            else:
+                u_value=1
+
+        if u_value==1:
+            self.render("login.html",error_username="username does not exist")
+
+
+class LogOut(Handler):
+    def get(self):
+        self.logout()
+        self.redirect('/signup')
 
 
 class Welcome(Handler):
     def get(self):
-        user_name = self.request.get('username')
-        self.render("welcome.html",username=user_name)
-
-
+        #username =
+        user_id = self.reading_cookies('user_id')
+        user_name = user_id and Userinfo.by_id(int(user_id))
+        if user_name:
+            self.render("welcome.html",username=user_id)
+        else:
+            self.redirect('/signup')
 
 
 app = webapp2.WSGIApplication([('/signup', SignUp),
                                ('/login', LogIn),
                                ('/?', Front),
+                               ('/logout', LogOut),
                                ('/welcome',Welcome)], debug=True)
 
 
