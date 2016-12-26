@@ -1,7 +1,28 @@
 *.pyc
 
-multiuserblog/python-docs-samples-master/
 
 
+
+
+multiuserblog/python-docs-samples-master/*
+!multiuserblog/python-docs-samples-master/appengine/
+
+multiuserblog/python-docs-samples-master/appengine/*
+!multiuserblog/python-docs-samples-master/appengine/standard/
+
+multiuserblog/python-docs-samples-master/appengine/standard/*
 !multiuserblog/python-docs-samples-master/appengine/standard/hello_world/
 
+
+
+
+
+
+tournament/class_trial/trial_vagrant/*
+!tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/
+
+tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/*
+!tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/
+
+tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/*
+!tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/forum/
