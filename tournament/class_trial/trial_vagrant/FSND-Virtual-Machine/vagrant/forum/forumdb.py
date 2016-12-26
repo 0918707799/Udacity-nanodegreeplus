@@ -33,6 +33,15 @@ def AddPost(content):
     '''
     DB = psycopg2.connect("dbname=forum")
     c = DB.cursor()
-    c.execute("INSERT into posts (content) values ('%s')" % content)
+    c.execute("INSERT into posts (content) values (%s)", (content,))
     DB.commit()
     DB.close()
+
+
+    # DO NOT TRY:
+    # ');delete from posts;--
+    # (this is called sql injection attack)
+    # This code can delete our database if we use our insert query as following:
+    # c.execute("INSERT into posts (content) values ('%s')", % content)
+    # and also if we add ''quotes then it will an error
+    # so to avoid this above correction in code is the solution
