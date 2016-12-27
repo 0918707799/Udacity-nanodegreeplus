@@ -1,0 +1,7 @@
+### to count the number of row (in this case, this will help to count the number of player)
+
+select count(*) as total from table_name
+
+
+### to count the number of total match
+select sum(column_name) as total_match from table_name

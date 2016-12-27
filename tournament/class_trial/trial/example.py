@@ -166,7 +166,7 @@ db.close()
 
 
 # ##view
-# if we are using same wuery many times then we can save that query and that is called view
+# if we are using same query many times then we can save that query and that is called view
 # note: it i kinda function call instead of copying code
 # Example table:
 #
@@ -177,7 +177,7 @@ db.close()
 # 345             CS101
 # 456             MATH245
 #
-# How manu students are enrolled in each course?
+# How many students are enrolled in each course?
 # create view course_size as
 #     select course_id, count(*) as num
 #         from Enrollment

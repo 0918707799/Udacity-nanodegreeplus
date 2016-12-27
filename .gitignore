@@ -26,5 +26,7 @@ tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/*
 
 tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/*
 !tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/forum/
+!tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/tournament/
 
 tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/forum/*.pyc
+tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/tournament/*.pyc
