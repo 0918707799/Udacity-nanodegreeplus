@@ -15,7 +15,7 @@ def deleteMatches():
     """Remove all the match records from the database."""
     db = connect()
     del_match = db.cursor()
-    del_match.execute("delete from match")
+    del_match.execute("delete from winning")
     db.commit()
     db.close()
     print ("table for matches has been deleted")
@@ -39,7 +39,6 @@ def countPlayers():
     c.execute("select count(*) from player")
     count =  c.fetchall()[0][0]
     db.close()
-    print ("counting__", count)
     return count
 
 
@@ -75,15 +74,10 @@ def playerStandings():
     """
     db = connect()
     db_player = db.cursor()
-    query ="""SELECT player.player_id, player.playername, winning.winnum
-                FROM player left join winning
-                on player.player_id = winning.player_id
-                ORDER BY winning.winnum desc
-    """
-    db_player.execute(query)
-    posts = ({'player_id': str(row[0]), 'name': str(row[1]), 'winning': str(row[2])} for row in db_player.fetchall())
+    db_player.execute("select * from playerstand")
+    posts = db_player.fetchall()
     db.close()
-    print (posts);
+    return posts
 
 
 def reportMatch(winner, loser):
@@ -95,8 +89,8 @@ def reportMatch(winner, loser):
     """
     db = connect()
     del_player = db.cursor()
-    query ="INSERT into match (winner, loser) values (%s, %s);", (winner, loser,)
-    del_player.execute(query)
+    del_player.execute("INSERT into winning (winner, loser) values (%s, %s);", (winner, loser,))
+    db.commit()
     db.close()
     print ("record added");
 
