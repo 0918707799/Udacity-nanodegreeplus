@@ -88,8 +88,8 @@ def reportMatch(winner, loser):
       loser:  the id number of the player who lost
     """
     db = connect()
-    del_player = db.cursor()
-    del_player.execute("INSERT into winning (winner, loser) values (%s, %s);", (winner, loser,))
+    report = db.cursor()
+    report.execute("INSERT into winning (winner, loser) values (%s, %s);", (winner, loser,))
     db.commit()
     db.close()
     print ("record added");
@@ -111,3 +111,21 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
+    db = connect()
+    pair = db.cursor()
+    pair.execute("select * from playerstand")
+    pairr =  pair.fetchall()
+    # print pairr
+    pair.execute("select count(*) from player")
+    total_player = pair.fetchall()[0][0]
+    # print total_player
+    db.close()
+    pairing = []
+    for player in range(0, int(total_player),2):
+        a_id = pairr [player][0]
+        a_name = pairr [player][1]
+        b_id = pairr [player+1][0]
+        b_name = pairr [player+1][1]
+        pairing.append((a_id, a_name, b_id, b_name))
+    print pairing
+    return pairing
