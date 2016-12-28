@@ -18,7 +18,7 @@ def deleteMatches():
     del_match.execute("delete from winning")
     db.commit()
     db.close()
-    print ("table for matches has been deleted")
+    # print ("table for matches has been deleted")
 
 
 
@@ -29,7 +29,7 @@ def deletePlayers():
     del_player.execute("delete from player")
     db.commit()
     db.close()
-    print ("table for players has been deleted");
+    # print ("table for players has been deleted");
 
 
 def countPlayers():
@@ -56,7 +56,7 @@ def registerPlayer(name):
     add_player.execute("INSERT into player (playername) values (%s)", (name,))
     db.commit()
     db.close()
-    print ("player added");
+    # print ("player added");
 
 
 def playerStandings():
@@ -92,7 +92,7 @@ def reportMatch(winner, loser):
     report.execute("INSERT into winning (winner, loser) values (%s, %s);", (winner, loser,))
     db.commit()
     db.close()
-    print ("record added");
+    # print ("record added");
 
 
 
@@ -127,5 +127,5 @@ def swissPairings():
         b_id = pairr [player+1][0]
         b_name = pairr [player+1][1]
         pairing.append((a_id, a_name, b_id, b_name))
-    print pairing
+    # print pairing
     return pairing

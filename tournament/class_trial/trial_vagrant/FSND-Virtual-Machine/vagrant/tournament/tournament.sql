@@ -16,15 +16,15 @@ CREATE TABLE player (
 );
 
 CREATE TABLE winning (
-                    match_id serial primary key,
-                    winner integer,
-                    loser integer,
-                    foreign key (winner) references player (player_id),
-                    foreign key (loser) references player (player_id)
+                    match_id SERIAL primary key,
+                    winner INTEGER,
+                    loser INTEGER,
+                    FOREIGN KEY (winner) REFERENCES player (player_id),
+                    FOREIGN KEY (loser) REFERENCES player (player_id)
 );
 
 CREATE VIEW playerstand AS
-    select player.player_id as pl_id, player.playername,
-    (select count(*) from winning where winning.winner = player.player_id) as win,
-    (select count(*) from winning where player.player_id = winning.winner or player.player_id = winning.loser) as total_match
-    from player group by player.player_id order by win desc;
+    SELECT player.player_id as pl_id, player.playername,
+    (SELECT count(*) FROM winning WHERE winning.winner = player.player_id) as win,
+    (SELECT count(*) FROM winning WHERE player.player_id = winning.winner or player.player_id = winning.loser) as total_match
+    FROM player GROUP BY player.player_id ORDER BY win desc;
