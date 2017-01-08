@@ -1,35 +1,43 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import cgi
 
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+from dbsetup import Restaurant, Base, MenuItem
+
+engine = create_engine('sqlite:///restaurantmenu.db')
+
+Base.metadata.bind = engine
+
+DBSession = sessionmaker(bind=engine)
+session = DBSession()
+
 
 class webServerHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         try:
-            if self.path.endswith("/hello"):
+            if self.path.endswith("/restaurant"):
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
                 self.end_headers()
                 output = ""
                 output += "<html><body>"
                 output += "<h1>Hello!</h1>"
-                output += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>What would you like me to say?</h2><input name="message" type="text" ><input type="submit" value="Submit"> </form>'''
+                items = session.query(Restaurant).all()
+                for i in items:
+                    # print i.name
+                    output += i.name + "<br>"
+                    output += "<a href='/edit'>edit</a>" +"<br>"
+                    output += "<a href='/delete'>delete</a>"+"<br>"+"<br>"
+                output += '''<form method='POST' enctype='multipart/form-data'
+                        action='/restaurant'><h2>Name of the restaurant
+                        </h2><input name="message" type="text" >
+                        <input type="submit" value="Submit"> </form>'''
                 output += "</body></html>"
                 self.wfile.write(output)
-                print output
-                return
-
-            if self.path.endswith("/hola"):
-                self.send_response(200)
-                self.send_header('Content-type', 'text/html')
-                self.end_headers()
-                output = ""
-                output += "<html><body>"
-                output += "<h1>&#161 Hola !</h1>"
-                output += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>What would you like me to say?</h2><input name="message" type="text" ><input type="submit" value="Submit"> </form>'''
-                output += "</body></html>"
-                self.wfile.write(output)
-                print output
+                # print output
                 return
 
         except IOError:
@@ -37,6 +45,7 @@ class webServerHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         try:
+            # count =10
             self.send_response(301)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
@@ -45,14 +54,13 @@ class webServerHandler(BaseHTTPRequestHandler):
             if ctype == 'multipart/form-data':
                 fields = cgi.parse_multipart(self.rfile, pdict)
                 messagecontent = fields.get('message')
-            output = ""
-            output += "<html><body>"
-            output += " <h2> Okay, how about this: </h2>"
-            output += "<h1> %s </h1>" % messagecontent[0]
-            output += '''<form method='POST' enctype='multipart/form-data' action='/hello'><h2>What would you like me to say?</h2><input name="message" type="text" ><input type="submit" value="Submit"> </form>'''
-            output += "</body></html>"
-            self.wfile.write(output)
-            print output
+                xyz = messagecontent[0]
+                print xyz + "  -- adding this"
+                restaurant1 = Restaurant(name=xyz)
+                session.add(restaurant1)
+                session.commit()
+            self.do_GET()
+            # print output
         except:
             pass
 
