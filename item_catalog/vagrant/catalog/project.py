@@ -15,9 +15,7 @@ session = DBSession()
 
 
 @app.route('/')
-@app.route('/hello')
-
-
+@app.route('/restaurant/')
 def Helloworld():
     restaurant = session.query(Restaurant).first()
     items = session.query(MenuItem).filter_by(restaurant_id = restaurant.id)
@@ -31,6 +29,20 @@ def Helloworld():
         output += '<br><br>'
     return output
 
+@app.route('/restaurant/<int:restaurant_id>/')
+def restaurantMenu(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    items = session.query(MenuItem).filter_by(restaurant_id=restaurant.id)
+    output = ''
+    for i in items:
+        output += i.name
+        output += '</br>'
+        output += i.price
+        output += '</br>'
+        output += i.description
+        output += '</br>'
+        output += '</br>'
+    return output
 
 if __name__ == '__main__':
     app.debug = True
