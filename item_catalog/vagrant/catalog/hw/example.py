@@ -1,7 +1,7 @@
 from flask import Flask
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Restaurant, MenuItem
+from dbsetup import Restaurant, Base, MenuItem
 
 app = Flask(__name__)
 
