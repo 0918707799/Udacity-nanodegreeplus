@@ -30,3 +30,7 @@ tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/*
 
 tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/forum/*.pyc
 tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/tournament/*.pyc
+
+item_catalog/vagrant/catalog/o_auth/client_secrets.json
+item_catalog/vagrant/catalog/o_auth/templates/login.html
+
