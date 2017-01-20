@@ -33,4 +33,6 @@ tournament/class_trial/trial_vagrant/FSND-Virtual-Machine/vagrant/tournament/*.p
 
 item_catalog/vagrant/catalog/o_auth/client_secrets.json
 item_catalog/vagrant/catalog/o_auth/templates/login.html
+item_catalog/vagrant/catalog/o_auth/fb_client_secrets.json
+
 
