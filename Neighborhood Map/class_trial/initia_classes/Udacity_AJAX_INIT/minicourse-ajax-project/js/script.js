@@ -54,6 +54,12 @@ function loadData() {
     // wikipedia AJAX request
     var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + cityStr +'&format=json&callback=wikiCallback';
 
+    // jsonp does not support error method so this is the replacement of error function
+    // if browser does not get wiki resources in 8 seconds it will show provided msg
+    var wikiRequestTimeout = setTimeout(function(){
+        $wikiElem.text("failed to get wikipedia resources!");
+    }, 8000);
+
     $.ajax({
         url:wikiUrl,
         dataType: "jsonp",
@@ -66,6 +72,8 @@ function loadData() {
                 var url = 'http://en.wikipedia.org/wiki/'+articleStr;
                 $wikiElem.append('<li><a href="'+ url +'">' + articleStr + '</a></li>');
             };
+
+            clearTimeout(wikiRequestTimeout);
         }
     });
 
