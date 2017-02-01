@@ -46,6 +46,9 @@ function loadData() {
                 article.snippet+'</p>'+'</li>');
         };
     })
+    .fail(function() {
+        $nytHeaderElem.text( "NYT artices could not be loaded!" );
+    });
 
     return false;
 };
