@@ -46,8 +46,27 @@ function loadData() {
                 article.snippet+'</p>'+'</li>');
         };
     })
+    // if getJSON function fails to grab info from NYT for any reason it goes into following erro function
     .fail(function() {
         $nytHeaderElem.text( "NYT artices could not be loaded!" );
+    });
+
+    // wikipedia AJAX request
+    var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + cityStr +'&format=json&callback=wikiCallback';
+
+    $.ajax({
+        url:wikiUrl,
+        dataType: "jsonp",
+        // jsonp: "callback",
+        success: function(response) {
+            var articlesList = response[1];
+
+            for (var i = 0; i <articlesList.length; i++){
+                articleStr = articlesList[i];
+                var url = 'http://en.wikipedia.org/wiki/'+articleStr;
+                $wikiElem.append('<li><a href="'+ url +'">' + articleStr + '</a></li>');
+            };
+        }
     });
 
     return false;
