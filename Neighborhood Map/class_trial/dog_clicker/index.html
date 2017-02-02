@@ -1,14 +1,28 @@
 <html lang="en">
+
     <head>
         <title>Dog clicker</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
     </head>
 
-    <body>
-        <div id="target">
-            <img src="dog.jpg" width=600 height=400 id="image">
-            <p>Count: <p><h2 id="num"></h2>
+    <body class="container">
+        <br><br>
+        <div class="row">
+            <div id="target1" class="col-md-6">
+                <h2 id="name1"></h2>
+                <img src="img/img1.jpg" id="image1">
+                <p> </p>
+                <h2 id="num1"></h2>
+            </div>
+            <div id="target2" class="col-md-6">
+                <h2 id="name2"></h2>
+                <img src="img/img2.jpg" id="image2">
+                <p> </p>
+                <h2 id="num2"></h2>
+            </div>
         </div>
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="js/libs/jquery.min.js"></script>
         <script src="js/dogscript.js"></script>
     </body>
+
 </html>
