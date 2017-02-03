@@ -3,22 +3,35 @@
     <head>
         <title>Dog clicker</title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body class="container">
         <br><br>
         <div class="row">
-            <div id="target1" class="col-md-6 text-center">
-                <h2 id="name1" style="color:#2A346C;"></h2>
-                <img src="img/img1.jpg" id="image1">
-                <p> </p>
-                <h2 id="num1"></h2>
+            <div class="col-md-2 abcd">
+                <br><br><br>
+                <ul id="dog">
+                    <li id="1" class="btn-txt btn" value="scooby" onclick="check(this.value)">SCOOBY</li>
+                    <li id="2" class="btn-txt btn" value="popoye" onclick="check(this.value)">POPYE</li>
+                    <li id="3" class="btn-txt btn" value="tom" onclick="check(this.value)">TOM</li>
+                    <li id="4" class="btn-txt btn" value="ruffy" onclick="check(this.value)">RUFFY</li>
+                    <li id="5" class="btn-txt btn" value="blue" onclick="check(this.value)">BLUE</li>
+                    <li id="6" class="btn-txt btn" value="augie" onclick="check(this.value)">AUGIE</li>
+                    <li id="7" class="btn-txt btn" value="bruno" onclick="check(this.value)"> BRUNO</li>
+                </ul>
             </div>
-            <div id="target2" class="col-md-6 text-center">
-                <h2 id="name2" style="color:#2A346C;"></h2>
-                <img src="img/img2.jpg" id="image2">
-                <p> </p>
-                <h2 id="num2"></h2>
+            <div class="col-md-9 text-center">
+                <br>
+                <br><br>
+                <div id="target" class="col-md-6 text-center">
+                    <h2 id="name" style="color:#2A346C;"></h2>
+                    <div id="imghld">
+                        <img src="img/img1.jpg" id="image">
+                    </div>
+                    <p> </p>
+                    <h2 id="num"></h2>
+                </div>
             </div>
         </div>
         <script src="js/libs/jquery.min.js"></script>
