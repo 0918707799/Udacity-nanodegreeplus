@@ -1,4 +1,4 @@
-var dognum = [0,0,0,0,0,0,0];
+var dognum = [0,0,0,0,0,0,0,0];
 var dogobj ={};
 
 var $name = $('#name');
