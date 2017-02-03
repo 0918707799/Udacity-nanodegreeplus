@@ -15,6 +15,7 @@ $("#dog li").click(function() {
     dogobj[imgName] = id;
     // $("#imghld").append('<img src="' +imgName + '">');
     $( "#imghld > img" ).replaceWith('<img src="' +imgName + '">');
+    $num.text("ClickCount is :: " + dognum[id]);
 
 });
 
