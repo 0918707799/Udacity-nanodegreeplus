@@ -81,7 +81,7 @@ var dogView = {
 
     render: function() {
         var currentDog = octopus.getCurrentDog();
-        this.countElem.textContent = currentDog.ClickCount;
+        this.countElem.textContent = 'ClickCount is: ' + currentDog.ClickCount;
         this.dogNameElem.textContent = currentDog.name;
         this.dogImageElem.src = currentDog.dogImg;
     }
@@ -105,6 +105,7 @@ var dogListView = {
             dog = dogs[i];
 
             elem = document.createElement('li');
+            elem.setAttribute('class', 'btn-txt btn');
             elem.textContent = dog.name;
 
             elem.addEventListener('click', (function(dogCopy) {
