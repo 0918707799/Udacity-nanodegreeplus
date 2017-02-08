@@ -1,3 +1,4 @@
+// this is model object, which has all the datas
 var model = {
     currentDog: null,
     dogs: [
@@ -39,32 +40,39 @@ var model = {
     ]
 };
 
+// octopus is a mediator between model and view.
 var octopus = {
 
+    // init function
     init: function() {
         model.currentDog = model.dogs[0];
         dogListView.init();
         dogView.init();
     },
 
+    // this will retrieve the current dog's info from model
     getCurrentDog: function() {
         return model.currentDog;
     },
 
+    // this will retrieve all the dogs'name
     getDogs: function() {
         return model.dogs;
     },
 
+    // this function will set the value of currentDog
     setCurrentDog: function(dog) {
         model.currentDog = dog;
     },
 
+    // increment of clickcount
     incrementCounter: function() {
         model.currentDog.ClickCount++;
         dogView.render();
     }
 };
 
+// this is view of dog's image and name and clickcount
 var dogView = {
     init: function() {
         this.dogElem = document.getElementById('dog');
@@ -87,6 +95,7 @@ var dogView = {
     }
 };
 
+// this vies is of list of dogs
 var dogListView = {
 
     init: function() {
