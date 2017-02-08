@@ -1,0 +1,21 @@
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px;
+    font-size: 25px;
+    border: none;
+    cursor: pointer;
+    margin: 3px 5px;
+}
+
+.btn-txt {
+    padding: 3px 10px;
+}
+
+
+
+.abcd {
+	display: inline-block;
+	margin: 1.4% 4%;
+	float: left;
+}
