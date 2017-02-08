@@ -18,10 +18,10 @@
                 <ul id="dog-list"></ul>
             </div>
             <div id="dog" class="col-md-8">
-                <h2 id="dog-name"></h2>
-                <div id="dog-count"></div>
+                <h2 data-bind="text: name"></h2>
+                <div data-bind="text: ClickCount"></div>
                 <br>
-                <img id="dog-img" src="">
+                <img data-bind="click: incrementCounter, attr: {src: dogImg}" src="">
             </div>
         </div>
         <br>
