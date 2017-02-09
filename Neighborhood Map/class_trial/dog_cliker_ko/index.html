@@ -15,7 +15,9 @@
             </div>
             <div class="col-md-3">
                 <br><br><br>
-                <ul id="dog-list"></ul>
+                <ul data-bind="foreach: initialDogs" >
+                    <li data-bind="text: $data.name" class="btn-txt btn"> </li>
+                </ul>
             </div>
             <div data-bind="with:currentDog" class="col-md-8">
                 <h2 data-bind="text: name"></h2>
