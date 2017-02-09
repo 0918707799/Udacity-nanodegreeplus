@@ -6,6 +6,11 @@ var ViewModel = function() {
     this.incrementCounter = function() {
         this.ClickCount(this.ClickCount() +1);
     };
+
+    this.hasClickedTooManyTimes = ko.pureComputed(function() {
+        return this.ClickCount() > 5;
+    }, this);
+
 }
 
 ko.applyBindings(new ViewModel())

@@ -19,6 +19,9 @@
             </div>
             <div id="dog" class="col-md-8">
                 <h2 data-bind="text: name"></h2>
+                <div data-bind='visible: hasClickedTooManyTimes'>
+                    <h4>This Dog is popular</h4>
+                </div>
                 <div data-bind="text: ClickCount"></div>
                 <br>
                 <img data-bind="click: incrementCounter, attr: {src: dogImg}" src="">
