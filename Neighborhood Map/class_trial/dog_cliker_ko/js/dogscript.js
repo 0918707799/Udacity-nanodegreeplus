@@ -1,4 +1,4 @@
-var ViewModel = function() {
+var Dog = function() {
     this.ClickCount = ko.observable(0);
     this.name = ko.observable('Scooby');
     this.dogImg = ko.observable('img/img1.jpg');
@@ -15,11 +15,15 @@ var ViewModel = function() {
             return this.buffer('doggie');
         }
     }, this);
-
-    this.incrementCounter = function() {
-        this.ClickCount(this.ClickCount() +1);
-    };
-
 }
 
-ko.applyBindings(new ViewModel())
+var ViewModel = function() {
+    this.currentDog = ko.observable( new Dog() );
+
+    this.incrementCounter = function() {
+        this.currentDog().ClickCount(this.currentDog().ClickCount() +1);
+    };
+
+};
+
+ko.applyBindings(new ViewModel());
