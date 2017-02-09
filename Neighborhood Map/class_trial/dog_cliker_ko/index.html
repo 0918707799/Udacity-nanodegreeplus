@@ -15,16 +15,13 @@
             </div>
             <div class="col-md-3">
                 <br><br><br>
-                <ul data-bind="foreach: initialDogs" >
-                    <li data-bind="text: $data.name" class="btn-txt btn"> </li>
+                <ul data-bind="foreach: dogList" >
+                        <li data-bind="text: name, click: $parent.itemClicked.bind()" class="btn-txt btn"> </li>
                 </ul>
             </div>
             <div data-bind="with:currentDog" class="col-md-8">
                 <h2 data-bind="text: name"></h2>
-                <h4>
-                    <div data-bind='text: buffer'>
-                    </div>
-                </h4>
+                <h4 data-bind="text: title"></h4>
                 <div data-bind="text: ClickCount"></div>
                 <br>
                 <img data-bind="click: $parent.incrementCounter, attr: {src: dogImg}" src="">

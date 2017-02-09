@@ -3,22 +3,22 @@ var Dog = function(data) {
     this.name = ko.observable(data.name);
     this.dogImg = ko.observable(data.dogImg);
     this.nickname = ko.observableArray(data.nickname);
-    this.buffer = ko.observable("doggie");
 
-
-    this.bufferfunction = ko.computed(function() {
+    this.title = ko.computed(function() {
+        var title;
         if (this.ClickCount() > 20) {
-            return this.buffer('People like this dog');
+            title = "people are crazy for this dog";
         } else if (this.ClickCount() > 10){
-            return this.buffer('People are crazy for this dog');
+            title = 'People are crazy for this dog';
         } else {
-            return this.buffer('doggie');
+            title = "Doggie";
         }
+        return title;
     }, this);
 }
 
 var initialDogs = [
-    {
+        {
             ClickCount: 0,
             name: 'Scooby',
             dogImg: 'img/img1.jpg',
@@ -75,6 +75,10 @@ var ViewModel = function() {
     this.incrementCounter = function() {
         self.currentDog().ClickCount(self.currentDog().ClickCount() +1);
     };
+
+    this.itemClicked = function(data) {
+            self.currentDog(data);
+    }
 
 };
 
