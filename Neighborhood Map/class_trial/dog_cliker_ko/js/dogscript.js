@@ -21,7 +21,7 @@ var ViewModel = function() {
     this.currentDog = ko.observable( new Dog() );
 
     this.incrementCounter = function() {
-        this.currentDog().ClickCount(this.currentDog().ClickCount() +1);
+        this.ClickCount(this.ClickCount() +1);
     };
 
 };
