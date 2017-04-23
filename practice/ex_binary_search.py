@@ -10,24 +10,19 @@ elements are in a strictly increasing order.
 Return the index of value, or -1 if the value
 doesn't exist in the list."""
 
+# refrence https://www.cs.usfca.edu/~galles/visualization/Search.html
+
 def binary_search(input_array, value):
-    """Your code goes here."""
-    a = len(input_array)
-    i = a/2
-    while ( i > 0):
-        if input_array[i] == value:
-            return i
-        elif input_array[i] > value:
-            i = (a-i)/2
-            if i == 0:
-                if input_array[i] == value:
-                    return i
-                else:
-                    return -1
-            continue
-        elif input_array[i] < value:
-            i = i + ((a -i)/2)
-            continue
+    small = 0
+    big = len(input_array)-1
+    while (small <= big):
+        mid = (small+big)/2
+        if (input_array[mid] == value):
+            return mid
+        elif (input_array[mid] > value):
+            big = mid-1
+        else:
+            small = mid +1
     return -1
 
 test_list = [1,3,9,11,15,19,29]
