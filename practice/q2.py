@@ -14,6 +14,7 @@ def question2(a):
     final_start = -1
     diff = 0
 
+    # single char string is always palindromic
     if length == 1:
         return a
     for i in range(0,length):
@@ -22,12 +23,12 @@ def question2(a):
         else:
             trial = i
         for j in range(1, trial):
-            if (i-j) <= 0 or (i+j) >= length or (j-i) == (j+i):
-                continue
-            else:
+            if (i-j) > 0 or (i+j) < length or (j-i) != (j+i):
                 if a[i-j] == a[i+j]:
                     start = i-j
                     end = i+j
+                else:
+                    break
         if (end-start) > diff:
             diff = end - start
             final_end = end
@@ -40,8 +41,11 @@ def question2(a):
 # ans should be "qwertytrewq"
 print question2("abqwertytrewqcdeyeheyeye")
 
-#ans should be "eye"
+# ans should be "eye"
 print question2("abeyej")
 
+# ans should be "a"
+print question2("a")
 
-# TODO: Try to solve this question without two for loop
+# ans should be "None"
+print question2("qwertyuioopxfcgh")
