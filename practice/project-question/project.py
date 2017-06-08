@@ -1,4 +1,3 @@
-# Question1
 
 def question1(s, t):
     if t in s:
