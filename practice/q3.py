@@ -1,9 +1,19 @@
 # Question2
 
 def question3(G):
+    simple = {}
+    tup = ()
+    maxim = 111111111
     for i in G:
-        print i
-        print G[i][0]
+        for j in G[i]:
+            if j[1] < maxim:
+                simple = {}
+                maxim = j[1]
+                simple[i]=j
+            elif j[1] == maxim:
+                simple[i]=j
+
+    print simple
 
 
 g = {'A': [('BB', 2)],
