@@ -1,29 +1,75 @@
-# Question2
+# Question3
+parent = {}
+
+def find(parent, i):
+    if parent[i] == i:
+        return i
+    return find(parent, parent[i])
+
+def KruskalAlgo(g, c, inve):
+    i = 0
+    parent = list(range(c))
+    rank = [0]*c
+    final = []
+    trial = []
+    fin_res = {}
+
+    for edge in range(c):
+        a,b,c =  g[edge]
+        x = find(parent, a)
+        y = find(parent ,b)
+
+        if x != y:
+            final.append([a,b,c])
+            rootx = find(parent, x)
+            rooty = find(parent, y)
+
+            if rank[rootx] < rank[rooty]:
+                parent[rootx] = rooty
+            elif rank[rootx] > rank[rooty]:
+                parent[rooty] = rootx
+            else :
+                parent[rooty] = rootx
+                rank[rooty] += 1
+
+    for v1,v2,w in final:
+        trial = [(inve[v2],w)]
+        if inve[v1] not in fin_res:
+            fin_res[inve[v1]] = trial
+        else:
+            fin_res[inve[v1]] = fin_res[inve[v1]].append(trial)
+    return fin_res
+
+
 
 def question3(G):
-    simple = {}
-    count = 0
+    simple = []
+    temp = {}
+    inve = {}
+    c = 0
+
+    for i in G:
+        temp[i] = c
+        inve[c] = i
+        c = c + 1
+
     for i in G:
         for j in G[i]:
-            if count == 0:
-                maxim = j[1]+1
-            if j[1] < maxim:
-                simple = {}
-                maxim = j[1]
-                simple[i] = j
-            elif j[1] == maxim:
-                if i in simple:
-                    simple[i] = [simple[i]]
-                    simple[i].append(j)
-                else:
-                    simple[i] = j
-            count = count + 1
+            m,n,p = temp[i], temp[j[0]], j[1]
+            simple.append([m,n,p])
 
-    print simple
+    simple =  sorted(simple ,key=lambda item: item[2])
+
+    return KruskalAlgo(simple, c, inve)
 
 
 g = {'A': [('B', 2)],
-      'B': [('A', 2), ('C', 5)],
-      'C': [('B', 5)]}
+    'B': [('A', 4), ('C', 2)],
+    'C': [('A', 2), ('B', 5)]}
 
-question3(g)
+print question3(g)
+
+
+# references:
+# http://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/GraphAlgor/kruskalAlgor.htm
+#  https://www.ics.uci.edu/~eppstein/PADS/MinimumSpanningTree.py
