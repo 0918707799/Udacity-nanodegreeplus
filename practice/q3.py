@@ -6,7 +6,7 @@ def find(parent, i):
         return i
     return find(parent, parent[i])
 
-def KruskalAlgo(g, c, inve):
+def KruskalAlgo(g, c, reve):
     i = 0
     parent = list(range(c))
     rank = [0]*c
@@ -33,11 +33,11 @@ def KruskalAlgo(g, c, inve):
                 rank[rooty] += 1
 
     for v1,v2,w in final:
-        trial = [(inve[v2],w)]
-        if inve[v1] not in fin_res:
-            fin_res[inve[v1]] = trial
+        trial = [(reve[v2],w)]
+        if reve[v1] not in fin_res:
+            fin_res[reve[v1]] = trial
         else:
-            fin_res[inve[v1]] = fin_res[inve[v1]].append(trial)
+            fin_res[reve[v1]] = fin_res[reve[v1]].append(trial)
     return fin_res
 
 
@@ -45,12 +45,12 @@ def KruskalAlgo(g, c, inve):
 def question3(G):
     simple = []
     temp = {}
-    inve = {}
+    reve = {}
     c = 0
 
     for i in G:
         temp[i] = c
-        inve[c] = i
+        reve[c] = i
         c = c + 1
 
     for i in G:
@@ -60,7 +60,7 @@ def question3(G):
 
     simple =  sorted(simple ,key=lambda item: item[2])
 
-    return KruskalAlgo(simple, c, inve)
+    return KruskalAlgo(simple, c, reve)
 
 
 g = {'A': [('B', 2)],
