@@ -43,6 +43,8 @@ def KruskalAlgo(g, c, reve):
 
 
 def question3(G):
+    if type(G) is not dict:
+        return "not dictionary"
     simple = []
     temp = {}
     reve = {}
@@ -71,8 +73,14 @@ g2 = {'A': [('B', 2)],
       'B': [('A', 2), ('C', 5)],
       'C': [('B', 5)]}
 
+g3 = "SDfsdf"
+
+g4 = {}
+
 print question3(g1)
 print question3(g2)
+print question3(g3)
+print question3(g4)
 
 
 # references:
