@@ -63,11 +63,16 @@ def question3(G):
     return KruskalAlgo(simple, c, reve)
 
 
-g = {'A': [('B', 2)],
+g1 = {'A': [('B', 2)],
     'B': [('A', 4), ('C', 2)],
     'C': [('A', 2), ('B', 5)]}
 
-print question3(g)
+g2 = {'A': [('B', 2)],
+      'B': [('A', 2), ('C', 5)],
+      'C': [('B', 5)]}
+
+print question3(g1)
+print question3(g2)
 
 
 # references:
