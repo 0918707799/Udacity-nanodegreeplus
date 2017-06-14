@@ -45,6 +45,8 @@ def KruskalAlgo(g, c, reve):
 def question3(G):
     if type(G) is not dict:
         return "not dictionary"
+    if len(G) < 1:
+        return G
     simple = []
     temp = {}
     reve = {}
@@ -56,6 +58,8 @@ def question3(G):
         c = c + 1
 
     for i in G:
+        if len(G[i]) == 0:
+            return "Dictionary has key without value"
         for j in G[i]:
             m,n,p = temp[i], temp[j[0]], j[1]
             simple.append([m,n,p])
@@ -75,12 +79,24 @@ g2 = {'A': [('B', 2)],
 
 g3 = "SDfsdf"
 
-g4 = {}
+g4 = {'A': [],}
+
+g5 = {}
 
 print question3(g1)
+# {'A': [('B', 2)], 'C': [('A', 2)]}
+
 print question3(g2)
+# {'A': [('B', 2)], 'C': [('B', 5)]}
+
 print question3(g3)
+# not dictionary
+
 print question3(g4)
+# Dictionary has key without value
+
+print question3(g5)
+# {}
 
 
 # references:
