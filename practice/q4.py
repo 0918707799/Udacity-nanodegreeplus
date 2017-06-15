@@ -36,3 +36,47 @@ def question4(T, r, n1, n2):
         return path2
     elif abcd == path2:
         return path1
+
+print question4([[0, 1, 0, 0, 0],
+           [0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0],
+           [1, 0, 0, 0, 1],
+           [0, 0, 0, 0, 0]],
+          3,
+          1,
+          4)
+# 3
+
+print question4([],
+                None,
+                None,
+                None)
+# empty BST matrix
+# None
+
+
+print question4([[1]],
+                1,
+                0,
+                7)
+# unappropriate n1 for given matrix
+# None
+
+print question4([[7]],
+                7,
+                7,
+                7)
+# 1
+
+
+print question4([[0, 0, 1, 0, 1, 0, 0],
+                 [1, 0, 0, 0, 0, 1, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 1, 0, 0, 1],
+                 [0, 0, 0, 0, 0, 0, 0]],
+                1,
+                0,
+                6)
+# 2
