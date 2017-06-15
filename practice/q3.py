@@ -1,5 +1,4 @@
 # Question3
-parent = {}
 
 def find(parent, i):
     if parent[i] == i:
