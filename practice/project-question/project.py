@@ -1,4 +1,5 @@
 
+# Question1
 def question1(s, t):
     if t in s:
         return True
@@ -6,28 +7,21 @@ def question1(s, t):
         return True
     else:
         return False
-
+print "\n________________________Q1________________________"
 # testcase for first questions
-print "\ntest1__Q1"
+print "\n\n--> test1__Q1", "\t(should be \"True\")"
 print question1("abcdefghij", "ed")
-print "-should be True-"
 
-print "___________________"
-print "\ntest2__Q1"
+print "\n\n--> test2__Q1", "\t(should be \"False\")"
 print question1("dancetime", "fun")
-print "-should be False-"
 
-print "___________________"
-print "\ntest3__Q1"
+print "\n\n--> test3__Q1" "\t(should be \"True\")"
 print question1("hellohowareyou", "era")
-print "-should be True-"
 
-print "___________________"
-print "\ntest4__Q1"
+print "\n\n--> test4__Q1", "\t(should be \"False\")"
 print question1("jamesbond", "almno")
-print "-should be False-"
 
-
+# Question2
 def question2(a):
     length = len(a)
     start = -1
@@ -60,25 +54,18 @@ def question2(a):
     else:
         return a[final_start:final_end+1]
 
-print "___________________"
-print "\ntest1__Q2"
+print "\n________________________Q2________________________"
+print "\n\n--> test1__Q2", "\t(should be \"qwertytrewq\")"
 print question2("abqwertytrewqcdeyeheyeye")
-print "-should be \"qwertytrewq\"-"
 
-print "___________________"
-print "\ntest2__Q2"
+print "\n\n--> test2__Q2", "\t(should be \"eye\")"
 print question2("abeyej")
-print "-should be \"eye\"-"
 
-print "___________________"
-print "\ntest3__Q2"
+print "\n\n--> test3__Q2", "\t(should be \"a\")"
 print question2("a")
-print "-should be \"a\"-"
 
-print "___________________"
-print "\ntest4__Q2"
+print "\n\n--> test4__Q2", "\t(should be \"None\")"
 print question2("qwertyuioopxfcgh")
-print "-should be \"None\"-"
 
 # Question3
 
@@ -121,8 +108,7 @@ def KruskalAlgo(g, c, reve):
             fin_res[reve[v1]] = fin_res[reve[v1]].append(trial)
     return fin_res
 
-
-
+# Question3
 def question3(G):
     if type(G) is not dict:
         return "not dictionary"
@@ -164,28 +150,99 @@ g4 = {'A': [],}
 
 g5 = {}
 
-
-print "___________________"
-print "\ntest1__Q3"
+print "\n________________________Q3________________________"
+print "\n\n--> test1__Q3", "\t(should be \"{'A': [('B', 2)], 'C': [('A', 2)]}\")"
 print question3(g1)
-print "-should be \"{'A': [('B', 2)], 'C': [('A', 2)]}\"-"
 
-print "___________________"
-print "\ntest2__Q3"
+print "\n\n--> test2__Q3", "\t(should be \"{'A': [('B', 2)], 'C': [('B', 5)]}\")"
 print question3(g2)
-print "-should be \"{'A': [('B', 2)], 'C': [('B', 5)]}\"-"
 
-print "___________________"
-print "\ntest3__Q3"
+print "\n\n--> test3__Q3", "\t(should be \"not dictionary\")"
 print question3(g3)
-print "-should be \"not dictionary\"-"
 
-print "___________________"
-print "\ntest4__Q3"
+print "\n\n--> test4__Q3", "\t(should be \"Dictionary has key without value\")"
 print question3(g4)
-print "-should be \"Dictionary has key without value\"-"
 
-print "___________________"
-print "\ntest5__Q3"
+print "\n\n--> test5__Q3", "\t(should be \"{}\")"
 print question3(g5)
-print "-should be \"{}\"-"
+
+# Question4
+def question4(T, r, n1, n2):
+    if len(T) == 0:
+        print "empty BST matrix"
+        return None
+    elif len(T) == 1:
+        if n1 == n2 and n1 == r:
+            return r
+        elif n1 != len(T) or n2 != len(T):
+            print "unappropriate n1/n2 for given matrix"
+            return None
+        else:
+            return r
+
+    temp = []
+    dicti = {}
+    for i in range(len(T)):
+        for j in range(len(T[i])):
+            if T[i][j] == 1:
+                temp.append(j)
+                dicti[i] = temp
+        temp = []
+
+    path1 = []
+    path2 = []
+
+    for a in dicti:
+        for value in dicti.values():
+            if a == value or a in value:
+                abcd = a
+            if n1 in dicti[a]:
+                path1 = a
+            if n2 in dicti[a]:
+                path2 = a
+    # print path1, path2, abcd
+    if abcd == path1:
+        return path2
+    elif abcd == path2:
+        return path1
+
+print "\n________________________Q4________________________"
+print "\n\n--> test1__Q4", "\t(should be \"3\")"
+print question4([[0, 1, 0, 0, 0],
+                 [0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0],
+                 [1, 0, 0, 0, 1],
+                 [0, 0, 0, 0, 0]],
+                 3,
+                 1,
+                 4)
+
+print "\n\n--> test2__Q4", "\t(should be \"empty BST matrix -newline- None\")"
+print question4([],
+                None,
+                None,
+                None)
+
+print "\n\n--> test3__Q4", "\t(should be \"unappropriate n1 for given matrix -newline- None\")"
+print question4([[1]],
+                1,
+                0,
+                7)
+
+print "\n\n--> test4__Q4", "\t(should be \"7\")"
+print question4([[7]],
+                7,
+                7,
+                7)
+
+print "\n\n--> test5__Q4", "\t(should be \"1\")"
+print question4([[0, 0, 1, 0, 1, 0, 0],
+                 [1, 0, 0, 0, 0, 1, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 0, 0, 0, 0],
+                 [0, 0, 0, 1, 0, 0, 1],
+                 [0, 0, 0, 0, 0, 0, 0]],
+                1,
+                0,
+                6)
