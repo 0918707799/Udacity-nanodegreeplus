@@ -1,44 +1,38 @@
 def question4(T, r, n1, n2):
     if len(T) == 0:
-        return T
+        print "empty BST matrix"
+        return None
     elif len(T) == 1:
-        return r
+        if n1 == n2 and n1 == r:
+            return r
+        elif n1 != len(T) or n2 != len(T):
+            print "unappropriate n1/n2 for given matrix"
+            return None
+        else:
+            return r
 
-    temp_root1 = []
-    temp1 = -1
-    temp_root2 = []
-    temp2 = -1
+    temp = []
+    dicti = {}
     for i in range(len(T)):
-        if i == r:
-            break
-        if T[i][n1] == 1:
-            print n1
-            n1 = i
-            temp_root1.append(i)
-    for j in range(len(T)):
-        print n2
-        if j == r:
-            print "________", j
-            break
-        if T[i][n2] == 1:
-            n2 = j
-            temp_root2.append(j)
+        for j in range(len(T[i])):
+            if T[i][j] == 1:
+                temp.append(j)
+                dicti[i] = temp
+        temp = []
 
-    print temp_root1, temp_root2
+    path1 = []
+    path2 = []
 
-    for a1 in temp_root1:
-        for a2 in temp_root2:
-            if a1 == a2:
-                return a1
-
-
-
-
-print question4([[0, 1, 0, 0, 0],
-           [0, 0, 0, 0, 0],
-           [0, 0, 0, 0, 0],
-           [1, 0, 0, 0, 1],
-           [0, 0, 0, 0, 0]],
-          3,
-          1,
-          4)
+    for a in dicti:
+        for value in dicti.values():
+            if a == value or a in value:
+                abcd = a
+            if n1 in dicti[a]:
+                path1 = a
+            if n2 in dicti[a]:
+                path2 = a
+    # print path1, path2, abcd
+    if abcd == path1:
+        return path2
+    elif abcd == path2:
+        return path1
