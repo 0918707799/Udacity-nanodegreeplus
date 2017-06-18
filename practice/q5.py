@@ -14,6 +14,8 @@ def ll_length(link):
         return c + 1
 
 def question5(ll, m):
+    if type(ll) == int or type(ll) == str:
+        return None
     counter = 1
     current = ll
     max_len = ll_length(ll)
@@ -44,7 +46,20 @@ n5.next = n6
 n6.next = n7
 n7.next = n8
 print question5(n1, 5)
-# Should print 4
+# 4
 
-b =""
-print question5(b, 5)
+a =""
+print question5(a, 5)
+# None
+
+b1 = Node(1)
+print question5(b1, 5)
+# None
+
+c = 55
+print question5(c, 1)
+# None
+
+d = "hello udacity"
+print question5(c, 7)
+# None
