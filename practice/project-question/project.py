@@ -246,3 +246,71 @@ print question4([[0, 0, 1, 0, 1, 0, 0],
                 1,
                 0,
                 6)
+
+class Node(object):
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def ll_length(link):
+    if link is None:
+        return 0
+    else:
+        c = 0
+        while (link):
+            c += 1
+            link = link.next
+        return c + 1
+
+def question5(ll, m):
+    if type(ll) == int or type(ll) == str:
+        return None
+    counter = 1
+    current = ll
+    max_len = ll_length(ll)
+    m = max_len - m
+    if m < 1:
+        return None
+    while current and counter <= m:
+        if counter == m:
+            return current.data
+        current = current.next
+        counter += 1
+    return None
+
+n1 = Node(1)
+n2 = Node(2)
+n3 = Node(3)
+n4 = Node(4)
+n5 = Node(5)
+n6 = Node(6)
+n7 = Node(7)
+n8 = Node(8)
+
+n1.next = n2
+n2.next = n3
+n3.next = n4
+n4.next = n5
+n5.next = n6
+n6.next = n7
+n7.next = n8
+
+print "\n________________________Q5________________________"
+print "\n\n--> test1__Q5", "\t(should be \"4\")"
+print question5(n1, 5)
+
+a =""
+print "\n\n--> test2__Q5", "\t(should be \"None\")"
+print question5(a, 5)
+
+b1 = Node(1)
+print "\n\n--> test3__Q5", "\t(should be \"None\")"
+print question5(b1, 5)
+
+c = 55
+print "\n\n--> test4__Q5", "\t(should be \"None\")"
+print question5(c, 1)
+
+d = "hello udacity"
+print "\n\n--> test5__Q5", "\t(should be \"None\")"
+print question5(c, 7)
