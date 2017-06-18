@@ -21,6 +21,9 @@ print question1("hellohowareyou", "era")
 print "\n\n--> test4__Q1", "\t(should be \"False\")"
 print question1("jamesbond", "almno")
 
+print "\n\n--> test5__Q1", "\t(should be \"False\")"
+print question1("", "almno")
+
 # Question2
 def question2(a):
     length = len(a)
@@ -66,6 +69,9 @@ print question2("a")
 
 print "\n\n--> test4__Q2", "\t(should be \"None\")"
 print question2("qwertyuioopxfcgh")
+
+print "\n\n--> test5__Q2", "\t(should be \"None\")"
+print question2("")
 
 # Question3
 

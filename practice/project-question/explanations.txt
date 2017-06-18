@@ -1,0 +1,50 @@
+--> Question 1:
+
+I am checking the existance of anagram in string as a substring using if condition. There can be the possiblities that anagram is in reverse sequence so also checking that. 
+
+Used "in" string function(string slicing) because it is faster compared to use of two nested loop. 
+
+Time Complexity: O(n) [avg case]
+		 O(mn) [worse case]
+Space Complexity: O(m+sigma) [avg case]
+where m is length of the string and n is the length of the search string
+
+
+--> Question 2:
+
+Using nested for loop to itterate through all the char in string and to compare previous(n-1,n-2,n-3,.., n-m) and next(n+1,n+2,n+3,.., n+m) characters of the current char(n) respectively & one by one. 
+Contiue comparing untill they mismatch.
+
+Time Complexity: O(n^2)
+
+--> Question 3:
+
+Using kruskal's algorithm because it works based on subroutine and disjoint set union data structure.Disjoint sets help us quickly determine which elements are connected and close and to unite two components into a single entity. It allows us to check cyclic flow of graph.
+
+Time Complexity: O(|E|log|V|)
+Space Complexity: O(|E|+|V|)
+
+
+--> Question 4:
+
+Iterating through all the BST matrix element in nested loop to check if the node has childeren or not and then if it is adding the dict with node as key and childeren as values(in list format) then comparing with the given node to get the correct output
+
+Time Complexity: O(n^2)
+Space Complexity: O(n) [best case]
+		  O(nm) [worse case]
+where n is the element of dict(key) and m is the number of element of the list(values of the dict)
+
+--> Question 5:
+
+I am checking the length and iterating element untill I find the correct element. I prefer this to avoid the nested for loop and to reduce the time complexity.
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+
+
+
+Reference:
+http://bigocheatsheet.com/
+https://stackoverflow.com/questions/18139660/python-string-in-operator-implementation-algorithm-and-time-complexity
+(Udacity videos)
