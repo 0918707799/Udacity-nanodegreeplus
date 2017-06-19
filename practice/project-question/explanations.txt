@@ -16,6 +16,7 @@ Using nested for loop to itterate through all the char in string and to compare 
 Contiue comparing untill they mismatch.
 
 Time Complexity: O(n^2)
+Space Complexity: O(n^2)
 
 --> Question 3:
 
@@ -39,12 +40,14 @@ where n is the element of dict(key) and m is the number of element of the list(v
 I am checking the length and iterating element untill I find the correct element. I prefer this to avoid the nested for loop and to reduce the time complexity.
 
 Time Complexity: O(n)
-Space Complexity: O(n)
+Space Complexity: O(1)
 
 
 
 
-Reference:
+References:
 http://bigocheatsheet.com/
+https://www.youtube.com/watch?v=5xosHRdxqHA
+http://www.geeksforgeeks.org/greedy-algorithms-set-2-kruskals-minimum-spanning-tree-mst/
 https://stackoverflow.com/questions/18139660/python-string-in-operator-implementation-algorithm-and-time-complexity
 (Udacity videos)

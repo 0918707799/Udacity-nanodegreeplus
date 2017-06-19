@@ -1,6 +1,7 @@
 
 # Question1
 def question1(s, t):
+    """returns true or false based on existance of anagram substring in a string"""
     if t in s:
         return True
     elif t[::-1] in s:
@@ -26,6 +27,7 @@ print question1("", "almno")
 
 # Question2
 def question2(a):
+    """returns the longest palindromic substring in given string"""
     length = len(a)
     start = -1
     end = -1
@@ -41,6 +43,7 @@ def question2(a):
             trial = length - i
         else:
             trial = i
+        # if current char is at n, then compares the char at (n-1,n-2,n-3,.., n-m) and (n+1,n+2,n+3,.., n+m) until they mismatche
         for j in range(1, trial):
             if (i-j) > 0 or (i+j) < length or (j-i) != (j+i):
                 if a[i-j] == a[i+j]:
@@ -53,6 +56,7 @@ def question2(a):
             final_end = end
             final_start = start
     if diff == 0:
+        # this means there is no palindromic substring in the string
         return None
     else:
         return a[final_start:final_end+1]
@@ -76,6 +80,7 @@ print question2("")
 # Question3
 
 def find(parent, i):
+    """returns the set of an element i"""
     if parent[i] == i:
         return i
     return find(parent, parent[i])
@@ -88,6 +93,7 @@ def KruskalAlgo(g, c, reve):
     trial = []
     fin_res = {}
 
+    # iterating through all the edges in the given graph
     for edge in range(c):
         a,b,c =  g[edge]
         x = find(parent, a)
@@ -98,11 +104,13 @@ def KruskalAlgo(g, c, reve):
             rootx = find(parent, x)
             rooty = find(parent, y)
 
+            # sorting tree based on ranking of tree and finding union of them
             if rank[rootx] < rank[rooty]:
                 parent[rootx] = rooty
             elif rank[rootx] > rank[rooty]:
                 parent[rooty] = rootx
             else :
+                # one will be root if they have sam rank
                 parent[rooty] = rootx
                 rank[rooty] += 1
 
@@ -116,6 +124,7 @@ def KruskalAlgo(g, c, reve):
 
 # Question3
 def question3(G):
+    """returns the minimum spanning tree using kruskal's algo"""
     if type(G) is not dict:
         return "not dictionary"
     if len(G) < 1:
@@ -125,6 +134,7 @@ def question3(G):
     reve = {}
     c = 0
 
+    # creating dict with node(key) and the position of the node(value)
     for i in G:
         temp[i] = c
         reve[c] = i
@@ -133,10 +143,11 @@ def question3(G):
     for i in G:
         if len(G[i]) == 0:
             return "Dictionary has key without value"
+        # converting graph into matrix form and saving them into list
         for j in G[i]:
             m,n,p = temp[i], temp[j[0]], j[1]
             simple.append([m,n,p])
-
+    # sorting created list based on the value of weight
     simple =  sorted(simple ,key=lambda item: item[2])
 
     return KruskalAlgo(simple, c, reve)
@@ -174,6 +185,7 @@ print question3(g5)
 
 # Question4
 def question4(T, r, n1, n2):
+    """retruns the common least common ancestor"""
     if len(T) == 0:
         print "empty BST matrix"
         return None
@@ -188,6 +200,7 @@ def question4(T, r, n1, n2):
 
     temp = []
     dicti = {}
+    # creating dictionary with node as key and list of child as value
     for i in range(len(T)):
         for j in range(len(T[i])):
             if T[i][j] == 1:
@@ -195,9 +208,11 @@ def question4(T, r, n1, n2):
                 dicti[i] = temp
         temp = []
 
+
     path1 = []
     path2 = []
 
+    # iterating through created dict and trying to match up n1 , n2 and to eleminate common path using abcd variable
     for a in dicti:
         for value in dicti.values():
             if a == value or a in value:
@@ -254,6 +269,7 @@ print question4([[0, 0, 1, 0, 1, 0, 0],
                 6)
 
 class Node(object):
+    """class of the Node"""
     def __init__(self, data):
         self.data = data
         self.next = None
@@ -269,6 +285,7 @@ def ll_length(link):
         return c + 1
 
 def question5(ll, m):
+    """returns the node at the given m -- vounting from the lsat """
     if type(ll) == int or type(ll) == str:
         return None
     counter = 1
@@ -278,6 +295,7 @@ def question5(ll, m):
     if m < 1:
         return None
     while current and counter <= m:
+        # iterating through the linked list and if it finds the mth element then returns it or else goes to the next
         if counter == m:
             return current.data
         current = current.next
